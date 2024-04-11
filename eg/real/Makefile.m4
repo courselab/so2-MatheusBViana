@@ -47,19 +47,34 @@ eg-00.bin eg-01_alpha.bin eg-01.bin eg-02.bin eg-02-v2.bin eg-02-v3.bin : %.bin 
 ## C source code.
 ## We build the program using gcc, as and ld.
 
+ifdef RT0
+LDSCRIPT = rt0.ld
+else
+LDSCRIPT = mbr.ld
+endif
 
-eg-03.bin  : %.bin : %.o %_utils.o mbr.ld rt0.o
-	ld -melf_i386 --orphan-handling=discard -T mbr-crt0.ld $*.o $*_utils.o -o $@
+
+
+ifdef BADORDER
+
+eg-03.bin  : %.bin : %_utils.o %.o  $(LDSCRIPT) rt0.o
+	ld -melf_i386 --orphan-handling=discard -T $(LDSCRIPT) $(filter-out %.ld rt0.o, $^) -o $@
+else
+eg-03.bin  : %.bin : %.o %_utils.o $(LDSCRIPT) rt0.o
+	ld -melf_i386 --orphan-handling=discard -T $(LDSCRIPT) $(filter-out %.ld rt0.o, $^) -o $@
+endif
+
+
 
 eg-03.o eg-03_utils.o  : %.o: %.s
 	as --32 $< -o $@
 
-ifeq (1,$(ALT))
-eg-03.i eg-03_utils.i : %.s : %.c
-	cpp -DATTR="NAKED __attribute__((fastcall))" -DRET="__asm__(\"ret\");"  $< -o $@
+ifdef SIMPLIFY
+eg-03.i eg-03_utils.i : %.i : %.c
+	cpp -I. -DATTR="NAKED __attribute__((fastcall))" -DRET="__asm__(\"ret\");"  $< -o $@
 else
-eg-03.i eg-03_utils.i : %.s : %.c
-	cpp $< -o $@
+eg-03.i eg-03_utils.i : %.i : %.c
+	cpp -I. -DATTR="" -DRET="" $< -o $@
 endif
 
 
@@ -72,8 +87,7 @@ endif
 eg-03.s eg-03_utils.s  :%.s: %.i
 	gcc -m16 -O0 -I. -Wall -fno-pic NO_CF_PROTECT  --freestanding -S $< -o $@
 
-
-rt0.o : rt0.S
+rt0.o : %.o : %.S
 	as --32 $< -o $@
 
 #
