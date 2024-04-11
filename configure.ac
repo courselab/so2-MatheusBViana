@@ -311,7 +311,7 @@ AX_CHECK_COMPILE_FLAG(
 AX_GCC_FUNC_ATTRIBUTE([naked])
 
 AS_IF([test x"$ax_cv_have_func_attribute_naked" = x"yes"],
- [setconf([NAKED],[__attribute((naked))])],
+ [setconf([NAKED],[__attribute__((naked))])],
  [echo "build_notes_ignored([Function attribute 'naked'])" >> syseg.log]
 )
 

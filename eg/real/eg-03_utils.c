@@ -8,7 +8,7 @@
 
 #include <eg-03.h>
 
-void  puts (const char *str)
+void ATTR puts (const char *str)
 {
 
   short *video = (short *) VIDEO_MEMORY;
@@ -19,5 +19,5 @@ void  puts (const char *str)
       video[i] = (VIDEO_ATTRIBUTE << 8) + str[i];
       i++;
     }
-
+  RET
 }

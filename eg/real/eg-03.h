@@ -13,7 +13,7 @@
 #define VIDEO_ATTRIBUTE 0X02
 
 
-void puts (const char *str);
+void ATTR puts (const char *str);
 
 
 

@@ -48,18 +48,33 @@ eg-00.bin eg-01_alpha.bin eg-01.bin eg-02.bin eg-02-v2.bin eg-02-v3.bin : %.bin 
 ## We build the program using gcc, as and ld.
 
 
-eg-03.bin eg-03-v2.bin : %.bin : %.o %_utils.o mbr.ld rt0.o
+eg-03.bin  : %.bin : %.o %_utils.o mbr.ld rt0.o
 	ld -melf_i386 --orphan-handling=discard -T mbr-crt0.ld $*.o $*_utils.o -o $@
 
-eg-03.o eg-03_utils.o eg-03-v2.o eg-03-v2_utils.o : %.o: %.s
+eg-03.o eg-03_utils.o  : %.o: %.s
 	as --32 $< -o $@
 
-eg-03.s eg-03_utils.s eg-03-v2.s eg-03-v2_utils.s :%.s: %.c
+ifeq (1,$(ALT))
+eg-03.i eg-03_utils.i : %.s : %.c
+	cpp -DATTR="NAKED __attribute__((fastcall))" -DRET="__asm__(\"ret\");"  $< -o $@
+else
+eg-03.i eg-03_utils.i : %.s : %.c
+	cpp $< -o $@
+endif
+
+
+# eg-03.s eg-03_utils.s  :%.s: %.c
+# 	gcc -m16 -O0 -I. -Wall -fno-pic NO_CF_PROTECT  -DATTR="NAKED __attribute__((fastcall))" -DRET="__asm__(\"ret\");" --freestanding -S $< -o $@
+
+# eg-03.s eg-03_utils.s  :%.s: %.c
+# 	gcc -m16 -O0 -I. -Wall -fno-pic NO_CF_PROTECT  -DATTR="" -DRET="" --freestanding -S $< -o $@
+
+eg-03.s eg-03_utils.s  :%.s: %.i
 	gcc -m16 -O0 -I. -Wall -fno-pic NO_CF_PROTECT  --freestanding -S $< -o $@
+
 
 rt0.o : rt0.S
 	as --32 $< -o $@
-
 
 #
 # Test and inspect
