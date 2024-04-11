@@ -136,23 +136,21 @@ m4_define([build_notes_architecture],
 ])
 
 
-m4_define([build_notes_cfp],
+m4_define([build_notes_ignored],
 [
 
- Notice: -fcf-protection not supported
+ Notice: $1 not supported
  --------------------------------------------------
 
- GCC flag '-fcf-protection' is not supported in your build platform and thus
- will be disabled across the entire project. This flag is used by some examples
- to improve the readability of machine code disassembling, by removing some
- extra instructions where they can be safely suppressed.
-
- The flag may be unavailable, for instance, if you are building SYSeg in an
- architecture different from x86_64, where it is not needed, anyway. On the
- other hand, if the build platform is a x86_64, than it is possible that your
- GCC is of a too old version. You may upgrade GCC to a newer version that
- supports the flag, or you may safely go on with your current version, with
- the harmless drawback of having the extra instruction in the machine code.
+ $1 is not supported in your build platform and thus
+ will be disabled across the entire project. This resource is used in some
+ examples to improve the readability of disassembly code, by suppressing
+ optional instructions that are not relevant for the example.
+ 
+ The option may be unavailable, for instance, if you are building SYSeg in an
+ architecture different from x86_64 --- where it is not needed, anyway --- or
+ if your compiler is of an old version (maybe update it?). Either may, you may
+ safely go on with your compiler, as the option is not strictly required.
 
  Detected build platform: $build_cpu on $build_os, $compiler $ax_cv_c_compiler_version
 
@@ -299,30 +297,27 @@ AS_IF([test x"$build_os" != x"linux-gnu"],
 
 syseg_check_gcc()
 
-dnl We currently require the compiler to support some specific functionality;
+dnl Check if compiler supports some options
 
 AX_CHECK_COMPILE_FLAG(
 	[-fcf-protection],
 	  [setconf([NO_CF_PROTECT],[-fcf-protection=none])],
 	[
-	  AC_MSG_WARN([*** -fcf-protection not supported by compiler])
-
 	  setconf([NO_CF_PROTECT],)
-
-	  AS_IF([test x"$build_cpu" == x"x86" || test x"$build_cpu" == x"x86_64"],
-	    AC_MSG_WARN([       GCC version is probably too old maybe upgrade it?]),
-	     AC_MSG_WARN([    Possibly not applicable to your build platform ($build_cpu)]))
-	     
-	  echo "build_notes_cfp" >> syseg.log
+	  echo "build_notes_ignored([GCC flag -fcf-protection])" >> syseg.log
 
 	])
 
 AX_GCC_FUNC_ATTRIBUTE([naked])
-if test $ax_cv_have_func_attribute_naked = "no"; then
-AC_MSG_ERROR([*** function attribute 'naked' not supported (gcc too old?)])
-fi
+
+AS_IF([test x"$ax_cv_have_func_attribute_naked" = x"yes"],
+ [setconf([NAKED],[__attribute((naked))])],
+ [echo "build_notes_ignored([Function attribute 'naked'])" >> syseg.log]
+)
 
 syseg_get_proj_info()
+
+dnl Check for programs
 
 syseg_check_prog_warn([xorriso],[xorriso],[xorriso])
 syseg_check_prog_warn([qemu],[qemu-system-i386],[qemu-system-i386])
