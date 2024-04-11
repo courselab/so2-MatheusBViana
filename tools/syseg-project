@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #    SPDX-FileCopyrightText: 2021 Monaco F. J. <monaco@usp.br>
 #   

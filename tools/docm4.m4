@@ -37,7 +37,7 @@ dnl   available at DOCM4_REPOSITORY
 define(DOCM4_HASH_HEAD_NOTICE,)
 
 define([DOCM4_BINTOOLS],
-[changecom(,)dnl
+[
 ## Bintools: convenience rules for inspecting binary files
 ##
 ## SYSeg's Bintools is a collection of Makefile rules for invoking
@@ -46,7 +46,7 @@ define([DOCM4_BINTOOLS],
 ## platform emulators and other facilities. Some shortcuts are ad hoc rules
 ## crafted under a poetic license and may depart from conventional Make usage.
 include(bintools.m4)
-changecom([#],)dnl
+
 
 # End of Bintools.
 # -------------------------------------------------------------
@@ -474,19 +474,19 @@ define([DOCM4_EXERCISE_DIRECTIONS],
 ##
 ##
 define([DOCM4_RELEVANT_RULES],
-[changecom(,)
+[
 ###########################################################
 ##
 ## These are the rules of interest in this set of examples.
 ##
-changecom([#],)
+
 ])
 
 ##
 ## Create a distribution bundle (sub-projects).
 ##
 define([DOCM4_EXPORT],
-[changecom(,)
+[
 ## Self-contained distribution bundle for stand-alone usage.
 ##
 ## This rule is meant for SYSeg users to create a stand-alone bundle
@@ -516,7 +516,7 @@ define([DOCM4_EXPORT],
 
 TARNAME=$1
 
-changecom([#],)
+
 
 syseg-export export:
 	@if ! test -f .dist; then\

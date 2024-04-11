@@ -42,6 +42,12 @@ USEFUL REFERENCES
 
    https://flint.cs.yale.edu/cs421/papers/x86-asm/asm.html
 
+ - X86 Opcode and Instruction Reference
+
+   http://ref.x86asm.net/index.html
+
+   http://ref.x86asm.net/geek.html#x00
+  
  Specifications
 
  ------------------------------
@@ -62,6 +68,13 @@ USEFUL REFERENCES
 
    https://docs.oracle.com/cd/E19683-01/816-1386/index.html
 
+=======
+ Quick References
+ ------------------------------
+
+ - x86 Instruction Set Reference
+
+   https://c9x.me/x86/
 
  Demonstrations
  ------------------------------
@@ -69,9 +82,23 @@ USEFUL REFERENCES
  Personal blogs and websites
  ------------------------------
 
+ - OSDEV.org (the canonical reference)
+
+   https://wiki.osdev.org/Main_Page
+
  - PC real-mode 
 
- The Starman's ream https://thestarman.pcministry.com/
+   The Starman's ream https://thestarman.pcministry.com/
+
+ - RandallHyde.com
+
+   Lots of texts about low-level programming, including the famous
+
+   very detailed book "The Art of ASSEMBLY LANGUAGE PROGRAMMING"
+
+   https://randallhyde.com/#Main
+
+ 
 
 
  History
