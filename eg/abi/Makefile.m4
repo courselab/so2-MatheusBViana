@@ -23,7 +23,7 @@ bin = eg-00 eg-01 eg-02 eg-02_pack eg-03 eg-03_c eg-04 eg-04_64 eg-05 eg-06 eg-0
 
 all : $(bin) 
 
-UPDATE_MAKEFILE
+DOCM4_UPDATE
 
 
 

@@ -145,4 +145,4 @@ clean:
 	rm -f $(bin) *.o *.i *.a main *.s *~ f1 f2 f
 
 DOCM4_BINTOOLS
-UPDATE_MAKEFILE 
+DOCM4_UPDATE 

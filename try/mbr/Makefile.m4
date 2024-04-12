@@ -29,7 +29,7 @@ AUXDIR =../../tools#
 
 all : $(bin) 
 
-UPDATE_MAKEFILE
+DOCM4_UPDATE
 
 ## C source code.
 ## We build the program using gcc, as and ld.

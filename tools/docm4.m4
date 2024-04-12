@@ -286,8 +286,9 @@ define([DOCM4_CLOSING_WORDS],
 ##
 
 # Marked for deprecation, use DOCM4_UPDATE, instead.
-define([UPDATE_MAKEFILE],[DOCM4_UPDATE])
-define([DOCM4_UPDATE_MAKEFILE],[DOCM4_UPDATE])
+# define([UPDATE_MAKEFILE],[DOCM4_UPDATE])
+# define([DOCM4_UPDATE_MAKEFILE],[DOCM4_UPDATE])
+
 
 define([DOCM4_UPDATE],
 [
@@ -295,7 +296,12 @@ define([DOCM4_UPDATE],
 #
 # These rules are not relevant for the source-code examples in this directory.
 # The are provided to automatically update docm4 files when their respective
-# sources change.
+# sources change. It won't have effect in an exported directory, though.
+
+-include .dist
+
+ifneq (yes,$(DOCM4_DIST))
+
 
 docm4_deps = DOCM4_DEPS
 
@@ -315,6 +321,8 @@ $(docm4_supported_files): % : %.m4 $(docm4_deps)
 updatem4: Makefile
 #	@path=$$(pwd) ; dir=$${path##*/}; make -C .. $$(for i in $(docm4_supported_files); do test -f $$dir/$$i.m4 && echo "$$dir/$$i" ; done)
 	@make $(docm4_supported_files)
+
+endif
 
 # End of update docm4 files.
 
@@ -516,13 +524,11 @@ define([DOCM4_EXPORT],
 
 TARNAME=$1
 
-
-
 syseg-export export:
 	@if ! test -f .dist; then\
 	  make do_export;\
 	 else\
-	  echo "This is a distribution pack already. Nothing to be done.";\
+	  echo "This is an exported bundle already. Nothing to be done.";\
 	fi
 
 do_export:
@@ -535,8 +541,10 @@ do_export:
 	for i in $(EXPORT_NEW_FILES); do\
 	  TOOL_PATH/syseg-newfile -c $(TARNAME)/$$i;\
 	done
-	touch $(TARNAME)/.dist
+	make $(TARNAME)/Makefile
+	echo "DOCM4_DIST=yes" > $(TARNAME)/.dist
 	tar zcvf $(TARNAME).tar.gz $(TARNAME)
+
 
 clean-export:
 	rm -f $(TARNAME).tar.gz

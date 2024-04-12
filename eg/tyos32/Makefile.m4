@@ -36,7 +36,7 @@ kernel_obj = kernel.o
 
 all : $(bin) 
 
-UPDATE_MAKEFILE
+DOCM4_UPDATE
 
 DOCM4_RELEVANT_RULES
 

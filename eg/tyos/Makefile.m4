@@ -41,7 +41,7 @@ AUXDIR =../../tools#
 
 all : $(bin) 
 
-UPDATE_MAKEFILE
+DOCM4_UPDATE
 
 DOCM4_RELEVANT_RULES
 
