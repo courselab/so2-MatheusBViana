@@ -20,7 +20,7 @@ DOCM4_HASH_HEAD_NOTICE([Makefile],[Make script])
 
 init: all 
 
-UPDATE_MAKEFILE
+DOCM4_UPDATE
 
 ##
 ## Relevant rules

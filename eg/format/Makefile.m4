@@ -21,7 +21,7 @@ bin = mkfat12-beta mkfat12 mbrinfo
 
 all : $(bin)
 
-UPDATE_MAKEFILE
+DOCM4_UPDATE
 
 DOCM4_BINTOOLS
 

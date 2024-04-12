@@ -30,7 +30,7 @@ AUXDIR =../../tools#
 
 all : $(bin) $(binx)
 
-UPDATE_MAKEFILE
+DOCM4_UPDATE
 
 ###########################################################                                    
 ##                                                                                             

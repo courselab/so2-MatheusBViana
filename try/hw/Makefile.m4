@@ -44,10 +44,10 @@ clean:
 
 # Create stand-alone distribution
 
-EXPORT_FILES = Makefile README
+EXPORT_FILES = README Makefile
 EXPORT_NEW_FILES = NOTEBOOK
 
 DOCM4_BINTOOLS
 DOCM4_EXPORT([hw],[0.1.1])
-UPDATE_MAKEFILE
+DOCM4_UPDATE
 

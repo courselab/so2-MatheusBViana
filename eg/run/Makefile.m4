@@ -83,7 +83,7 @@ clean:
 	rm -f *-rel *-pic *-static *.a *.so *.d *.o
 
 
-UPDATE_MAKEFILE
+DOCM4_UPDATE
 
 DOCM4_BINTOOLS
 

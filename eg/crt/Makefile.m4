@@ -19,7 +19,7 @@ include(docm4.m4)dnl
 
 init: all 
 
-UPDATE_MAKEFILE
+DOCM4_UPDATE
 
 ##
 ## Relevant rules
