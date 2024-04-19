@@ -128,7 +128,7 @@ EOF
 	;;
 
     README.m4)
-	cat <<EOF
+	cat <<EOF > $FILEPATH
 include(docm4.m4)
 
  Title
