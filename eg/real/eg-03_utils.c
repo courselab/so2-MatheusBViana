@@ -8,7 +8,7 @@
 
 #include <eg-03.h>
 
-void __attribute__((naked, fastcall)) puts (const char *str)
+void ATTR puts (const char *str)
 {
 
   short *video = (short *) VIDEO_MEMORY;
@@ -19,7 +19,5 @@ void __attribute__((naked, fastcall)) puts (const char *str)
       video[i] = (VIDEO_ATTRIBUTE << 8) + str[i];
       i++;
     }
-
-  __asm__("ret");
-
+  RET
 }

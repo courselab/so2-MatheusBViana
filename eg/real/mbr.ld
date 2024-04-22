@@ -6,7 +6,7 @@
  *    This file is part of SYSeg, available at https://gitlab.com/monaco/syseg.
  */
 
-/*  Linker script for MBR. */
+/*  Linker script for MBR (without rt0). */
 
 OUTPUT_FORMAT(binary)		/* Output flat binary (no structure) */
 SECTIONS
@@ -25,21 +25,10 @@ SECTIONS
 	    BYTE(0x55)
             BYTE(0xAA)
         }
-	__END_STACK__ = 0x7bff;	 /* End of the 64K block. */
-}
-STARTUP(rt0.o)			 /* Prepend with the start file. */
+	__END_STACK__ = 0x7c00;	 /* Below the bootloader. */
+} 
 
 
-/* Notes.
 
-   BIOS shall load the program at 0x7c00.
-   We position the stack (bottom) just bellow the loaded program.
 
-   Our assemlber outputs an ELF object with several sections: text (executable code),
-   .rodata (e.g. inline strings), .bss and .data (global variables). We need to copy
-   all them into the executable file. 
-
-   Boot signature 0xaa55 is added at position 511-512.
-
- */
 

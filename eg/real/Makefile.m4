@@ -21,16 +21,11 @@ include(docm4.m4)dnl
 # Main examples and auxiliary examples
 #
 
-bin = eg-00.bin eg-01_alpha.bin eg-01.bin eg-02.bin
+bin = eg-00.bin eg-01_alpha.bin eg-01.bin eg-02.bin eg-03.bin egx-01.bin egx-02.bin
 
-binx =  egx-01.bin egx-02.bin
-
-AUXDIR =../../tools#
+all : $(bin)
 
 
-all : $(bin) $(binx)
-
-DOCM4_UPDATE
 
 ###########################################################                                    
 ##                                                                                             
@@ -43,31 +38,61 @@ DOCM4_UPDATE
 eg-00.o eg-01_alpha.o eg-01.o eg-02.o eg-02-v2.o eg-02-v3.o : %.o : %.S
 	as --32 $< -o $@
 
-eg-00.bin eg-01_alpha.bin eg-01.bin eg-02.bin eg-02-v2.bin eg-02-v3.bin : %.bin : %.o mbr-nort0.ld
-	ld -melf_i386 --orphan-handling=discard  -T mbr-nort0.ld $(filter %.o, $^) -o $@
+eg-00.bin eg-01_alpha.bin eg-01.bin eg-02.bin eg-02-v2.bin eg-02-v3.bin : %.bin : %.o mbr.ld
+	ld -melf_i386 --orphan-handling=discard  -T mbr.ld $(filter %.o, $^) -o $@
+
+
+
 
 ## C source code.
 ## We build the program using gcc, as and ld.
 
-binc = eg-03
+ifdef RT0
+LDSCRIPT = rt0.ld
+else
+LDSCRIPT = mbr.ld
+endif
 
-$(binc:%=%.bin) : %.bin : %.o %_utils.o mbr.ld rt0.o
-	ld -melf_i386 --orphan-handling=discard -T mbr.ld $*.o $*_utils.o -o $@
 
-$(binc:%=%.o) $(binc:%=%_utils.o) rt0.o :%.o: %.s
+
+ifdef BADORDER
+
+eg-03.bin  : %.bin : %_utils.o %.o  $(LDSCRIPT) rt0.o
+	ld -melf_i386 --orphan-handling=discard -T $(LDSCRIPT) $(filter-out %.ld rt0.o, $^) -o $@
+else
+eg-03.bin  : %.bin : %.o %_utils.o $(LDSCRIPT) rt0.o
+	ld -melf_i386 --orphan-handling=discard -T $(LDSCRIPT) $(filter-out %.ld rt0.o, $^) -o $@
+endif
+
+
+
+eg-03.o eg-03_utils.o  : %.o: %.s
 	as --32 $< -o $@
 
-$(binc:%=%.s) $(binc:%=%_utils.s) rt0.s :%.s: %.c
+ifdef SIMPLIFY
+eg-03.i eg-03_utils.i : %.i : %.c
+	cpp -I. -DATTR="NAKED __attribute__((fastcall))" -DRET="__asm__(\"ret\");"  $< -o $@
+else
+eg-03.i eg-03_utils.i : %.i : %.c
+	cpp -I. -DATTR="" -DRET="" $< -o $@
+endif
+
+
+# eg-03.s eg-03_utils.s  :%.s: %.c
+# 	gcc -m16 -O0 -I. -Wall -fno-pic NO_CF_PROTECT  -DATTR="NAKED __attribute__((fastcall))" -DRET="__asm__(\"ret\");" --freestanding -S $< -o $@
+
+# eg-03.s eg-03_utils.s  :%.s: %.c
+# 	gcc -m16 -O0 -I. -Wall -fno-pic NO_CF_PROTECT  -DATTR="" -DRET="" --freestanding -S $< -o $@
+
+eg-03.s eg-03_utils.s  :%.s: %.i
 	gcc -m16 -O0 -I. -Wall -fno-pic NO_CF_PROTECT  --freestanding -S $< -o $@
 
-
-
+rt0.o : %.o : %.S
+	as --32 $< -o $@
 
 #
 # Test and inspect
 #
-
-# include $(AUXDIR)/bintools.makefile
 
 .PHONY: clean clean-extra intel att 16 32 diss /diss /i16 /i32 /a16 /a32
 
@@ -78,8 +103,8 @@ $(binc:%=%.s) $(binc:%=%_utils.s) rt0.s :%.s: %.c
 egx-01.o egx-02.o : %.o : %.S
 	as --32 $< -o $@
 
-egx-01.bin egx-02.bin : %.bin : %.o mbr-nort0.ld
-	ld -melf_i386 -T mbr-nort0.ld --orphan-handling=discard $(filter %.o, $^) -o $@
+egx-01.bin egx-02.bin : %.bin : %.o mbr.ld
+	ld -melf_i386 -T mbr.ld --orphan-handling=discard $(filter %.o, $^) -o $@
 
 #
 # Housekeeping
@@ -94,5 +119,5 @@ clean-extra:
 
 
 DOCM4_BINTOOLS
-
+UPDATE_MAKEFILE
 

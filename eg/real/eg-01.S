@@ -28,7 +28,7 @@ halt:
 	jmp halt
 
 msg:
-	.byte "Hello World"
+	.string "Hello World"
 	
 
 

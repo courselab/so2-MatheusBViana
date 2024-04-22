@@ -64,6 +64,11 @@ USEFUL REFERENCES
 
    http://www.techhelpmanual.com/
 
+ - Linker and Libraries Guide (Oracle
+
+   https://docs.oracle.com/cd/E19683-01/816-1386/index.html
+
+=======
  Quick References
  ------------------------------
 
@@ -95,6 +100,18 @@ USEFUL REFERENCES
 
  
 
+
+ History
+ ------------------------------
+
+ - A Guide Through The History of Unix & Linux: Everything You Need To Know,
+   by Eric Londo, 2020
+   
+   https://frontpagelinux.com/articles/guide-through-history-of-unix-linux-everything-you-need-to-know/
+
+ - Installing the GE-645 in Paris, by Dave Vinograd
+
+   https://multicians.org/drv-bull.html
 
  Lore
  ------------------------------
