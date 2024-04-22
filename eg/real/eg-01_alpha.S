@@ -26,13 +26,13 @@ __start:
         movb %al, (%si)            /* Write a character.    */
         movb $0x20, 1(%si)	   /* Apply attribute.      */
 
-msg:
-	.string "Hello World"
-	
 halt:
 	hlt
 	jmp halt
 
+msg:
+	.string "Hello World"
+	
 
 	/*
 
