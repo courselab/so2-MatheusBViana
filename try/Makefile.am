@@ -11,11 +11,11 @@
 
 # Name the subdirs in this section.
 
-extra_subdirs = mbr tyos imf01 
+extra_subdirs = mbr tyos imf01 bcmd
 
 # List of files that should be created from the source m4 files.
 
-docm4_files = README mbr/README mbr/Makefile tyos/Makefile tyos/README imf01/README imf01/Makefile hack01/README hack01/Makefile hw/README hw/Makefile 
+docm4_files = README mbr/README mbr/Makefile tyos/Makefile tyos/README imf01/README imf01/Makefile hack01/README hack01/Makefile hw/README hw/Makefile bcmd/README bcmd/Makefile
 
 
 ##

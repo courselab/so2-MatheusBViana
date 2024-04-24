@@ -454,14 +454,15 @@ define([DOCM4_DELIVERY_DIRECTIONS],
  
 
  When you believe your work is complete, mark your final revision with a
- tag. Unless the exercise specification informs differently, use the tag 'done'
- for your final delivery. If you need to submit a revision after that, use the
- tag 'rev1', 'rev2' and so on.
+ tag. Unless the exercise specification informs differently, use the tag
+ '<dir>-done', where '<dir>' is the name of the directory containing the
+ project. If you need to submit a revision after that, use the
+ tag '<dir>-rev1', '<dir>-rev2' and so on.
  
  To tag your delivery:
 
-     $ git tag done
-     $ git push origin done
+     $ git tag <dir>-done
+     $ git push origin <dir>-done
 
  The instructor will know you are finished with the exercise.
 

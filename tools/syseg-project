@@ -343,6 +343,10 @@ Upstream-Name: $(basename $FILEPATH)
 Upstream-Contact: $AUTHOR <$EMAIL>
 Source: $URL
 
+Files: */.dist
+Copyright: $AUTHOR <$EMAIL>
+License: CC0-1.0
+
 EOF
 
 
