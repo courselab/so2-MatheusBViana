@@ -6,14 +6,14 @@ dnl    This file is part of SYSeg, available at https://gitlab.com/monaco/syseg.
 
 include(docm4.m4)
 
- BootCmd : Boot Command
+ 2SBoot: a two-stage boot
  ==============================
  
- BootCmd is a very simple command-line interpreter that fits entirely
- within the first 512-byte sector of a USB stick. It is meant to be loaded by
- the BIOS legacy boot method and execute in x86 real-mode.
+ 2SBoot is a very simple two-stage bootloader. The first stage, which fits
+ within the boot sector, loads the remaining sectors from the boot media using
+ the BIOS disk service.
 
- Currently, the program implements only a single built-in command 'help'.
+ The second stage prints a greeting message and halts.
 
  Challenge
  ------------------------------

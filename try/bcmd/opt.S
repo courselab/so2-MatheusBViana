@@ -5,6 +5,7 @@
 #    This file is part of SYSeg, available at https://gitlab.com/monaco/syseg.
 
 	.code16
+	.global strcmp
 
 	## Compare two strings
 	##
@@ -25,19 +26,19 @@ strcmp_loop:
 	movb (%si), %bl   /* Load byte from address pointed by %si into %bl. */
 	movb (%di), %cl   /* Load byte from address pointed by %di into %cl. */
 	cmpb %cl, %bl     /* Compare the bytes in %bl and %cl.               */
-	je strcmp_eq      /* If they're not equal, jump to strcmp_eq .       */
+	je strcmp_eq      /* If they're equal, skip 'inc %ax'.               */
 	inc %ax
 strcmp_eq:
 	inc %si           /* Move to the next byte in string1.               */
 	inc %di           /* Move to the next byte in string2.               */
 	jmp strcmp_loop   /* Repeat the loop.                                */
 strcmp_end:
-	mov %ax, strcmp_tmp  /* Save %ax.                                    */
+	mov %ax, strcmp_tmp  /* Save %ax before popa.                        */
 	popa	             /* Restore all GP registers.                    */
-	mov strcmp_tmp, %ax  /* Restore %ax.                                 */
+	mov strcmp_tmp, %ax  /* Restore %ax after popa.                      */
 	ret               /* Return.                                         */
 
 	.section .data
 
-strcmp_tmp:
+strcmp_tmp:	          /* Temporary memory for %ax.                       */
 	.byte 0x0

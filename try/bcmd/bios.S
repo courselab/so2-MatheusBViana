@@ -102,31 +102,6 @@ readln_end:
 	popa			/* Restore all GP registers.                  */
 	ret
 
-	## Compare
-	##
-	##
-	
-strcmp:
-    xor %ax, %ax       /* Zero %ax to contain the result.                */
-    mov %cx, %si       /* Copy string1 to %si.                           */
-    mov %dx, %di       /* Copy string2 to %si.                           */
-strcmp_loop:
-    cmpb $0, (%si)    /* Compare byte at address pointed by %si with 0.  */
-    je strcmp_end     /* If it's 0, we've reached the end of the string. */
-    cmpb $0, (%di)    /* Compare byte at address pointed by %di with 0.  */
-    je strcmp_end     /* If it's 0, we've reached the end of the string. */
-    movb (%si), %bl   /* Load byte from address pointed by %si into %bl. */
-    movb (%di), %cl   /* Load byte from address pointed by %di into %cl. */
-    cmpb %cl, %bl     /* Compare the bytes in %bl and %cl.               */
-    je strcmp_eq      /* If they're not equal, jump to strcmp_eq.        */
-    inc %ax
-strcmp_eq:
-    inc %si           /* Move to the next byte in string1.               */
-    inc %di           /* Move to the next byte in string2.               */
-    jmp strcmp_loop   /* Repeat the loop.                                */
-strcmp_end:
-    ret               /* Return.                                         */
-	
 	## Read-only data
 	##
 	##

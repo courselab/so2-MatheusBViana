@@ -9,10 +9,10 @@
 #include "bios.h"
 #include "utils.h"
 
-#define PROMPT "$ "
-char buffer[10];
+#define PROMPT "$ "		/* Prompt sign.      */
+#define SIZE 20			/* Read buffer size. */
 
-int __attribute__((fastcall)) strcmp(const char*, const char*);
+char buffer[SIZE];		/* Read buffer.      */
 
 int main()
 {
@@ -22,12 +22,10 @@ int main()
 
   while (1)
     {
-      print(PROMPT);
-      readln(buffer);
+      print(PROMPT);		/* Show prompt.               */
+      readln(buffer);		/* Read use input.            */
 
-      println(buffer);
-      
-      if (buffer[0])
+      if (buffer[0])		/* Execute built-in command.  */
 	{
 	  if (!strcmp(buffer,"help"))
 	    println("A Beattles's song.");
