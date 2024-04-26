@@ -28,10 +28,11 @@ include(docm4.m4)dnl
  Contents
  ------------------------------
 
-  Do, or do not. There is no “try”  (Yoda) 
+  "Do, or do not. There is no try”.  (Yoda) 
 
 
-  - mbr		a real-mode command line interpreter witch fits the MBR
-
-  - bl		a minimal bootloadr for legacy boot
-
+  - hw	    write an assembler+linker to build your own x85 real-mode program
+  - bcmd    extend a boot-sector-size x86 real-mode command-line interpreter
+  - hack01  exploit a program design flaw to break an encrypt message
+  - imf01   (under review)
+  - tyos    extend a DOS-like program that reads execute external programs (under review).
