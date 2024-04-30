@@ -6,9 +6,11 @@
  *    This file is part of SYSeg, available at https://gitlab.com/monaco/syseg.
  */
 
-#ifndef UTILS_H
-#define UTILS_H
+#ifndef BIOS2_H
+#define BIOS2_H
 
-int __attribute__((fastcall)) strcmp(const char *s1, const char *s2);
+#include "bios1.h"
 
-#endif  /* UTILS_H  */
+void __attribute__((fastcall)) readln(char *);
+
+#endif  /* BIOS2_H  */

@@ -6,15 +6,19 @@
  *    This file is part of SYSeg, available at https://gitlab.com/monaco/syseg.
  */
 
+#include "bios1.h"
+#include "klib.h"
 
-
-int __attribute__((fastcall)) strcmp(const char *s1, const char *s2)
+void kernel_init(void)
 {
-  while (*s1 && *s2 && *s1 == *s2) {
-    s1++;
-    s2++;
-  }
-  return (*s1 - *s2);
+  println  ("Kernel:     extra sectors successfully loaded by the bootloader.");
+
+  splash();
+
+  bounce();
+  
+  halt();
+  
 }
 
 
