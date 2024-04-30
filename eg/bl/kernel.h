@@ -6,9 +6,9 @@
  *    This file is part of SYSeg, available at https://gitlab.com/monaco/syseg.
  */
 
-#ifndef UTILS_H
-#define UTILS_H
+#ifndef KERNEL_H
+#define KERNEL_H
 
-int __attribute__((fastcall)) strcmp(const char *s1, const char *s2);
+void kernel_init(void);
 
-#endif  /* UTILS_H  */
+#endif  /* KERNEL_H  */

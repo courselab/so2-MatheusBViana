@@ -12,6 +12,9 @@
 	## This is a handcrafted memory-optized version of the strcmp()
 	## function's C counterpart in utils.c. You may prefer this one
 	## if running out of space in the 512-byte program.
+	##
+	## PS: can you think of an even shorter version? If so, contribute 
+	## your thoughts (see CONTRIBUTING.md)
 	
 strcmp:
 	pusha	           /* Save all GP registers.                         */
