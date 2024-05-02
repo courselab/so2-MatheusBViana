@@ -32,6 +32,7 @@ SECTIONS
 	{
 	  kernel.o (.text .data .bss .rodata)
 	  klib.o (.text .data .bss .rodata)
+	  bios2.o (.text .data .bss .rodata)
 	}
 
 	_KERNEL_SIZE = . - _KERNEL_ADDR;

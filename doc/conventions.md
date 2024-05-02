@@ -50,7 +50,10 @@
    transfer rate in the other).
 
    To avoid the confusion, some references use the prefix Ki, Mi, Gi etc. to
-   explicitly indicate the power-of-two multiplier.
+   explicitly indicate the power-of-two multiplier [1] --- a proposal endorsed
+   by several normative organizations. In this approach, rather than kilo, mega
+   and giga, the alternative prefixes are called kibi, mibi and gibi, and so on.
+   
 
    Our call is to assume the traditional power-of-two multiples that are familiar
    to most specialists and apprentices in the context of computer sciences and
@@ -60,7 +63,7 @@
    often preferred to use multiple-of-tree exponents as those matches the SI
    multipliers, for example 5e3 V means 5 kV (5 thousand volts) in SI.
 
- 
+ [1] Binary prefix: https://en.wikipedia.org/wiki/Binary_prefix
 
  
 

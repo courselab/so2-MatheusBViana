@@ -9,14 +9,14 @@
 #include "bios1.h"
 #include "klib.h"
 
-void draw(void);
-
 void kernel_init(void)
 {
-  println  ("Kernel successfully loaded by the bootloader.");
+  println  ("Kernel:     extra sectors successfully loaded by the bootloader.");
 
   splash();
 
+  bounce();
+  
   halt();
   
 }

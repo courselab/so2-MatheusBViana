@@ -12,13 +12,11 @@
 #define PROMPT "$ "		/* Prompt sign.      */
 #define SIZE 20			/* Read buffer size. */
 
-char buffer[SIZE];		/* Read buffer.      */
-
 int main()
 {
   clear();
   
-  println  ("Bootloader successfully loaded by BIOS.");
+  println  ("Bootloader: boot sector successfully loaded by BIOS.");
 
   load_kernel();
   

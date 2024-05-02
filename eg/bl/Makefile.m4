@@ -11,7 +11,7 @@ DOCM4_RELEVANT_RULES
 
 all: boot.bin
 
-boot.bin : stage1.o bios1.o kernel.o klib.o
+boot.bin : stage1.o bios1.o kernel.o klib.o bios2.o
 	ld -melf_i386 -T boot.ld --orphan-handling=discard $^ -o $@
 
 %.o : %.c
@@ -20,7 +20,9 @@ boot.bin : stage1.o bios1.o kernel.o klib.o
 %.o : %.S
 	as -32 $< -o $@
 
-stage1.o : bios1.h 
+stage1.o : bios1.h kernel.h
+kernel.o : bios1.h klib.h
+klib.o:    bios2.h klib.h
 
 boot.bin : .EXTRA_PREREQS = rt0.o boot.ld
 
